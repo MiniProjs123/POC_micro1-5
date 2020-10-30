@@ -1,0 +1,119 @@
+-------------------------------------------------
+BARRY APP NOTES
+-------------------------------------------------
+
+1) Layers of this REST app:
+
+   --> Controller
+   --> Usecase service
+   --> Service
+   --> Repository - accesses SOAP
+   --> backend system
+
+   ==> DTO / representation
+   ==> Domain
+   ==> Entity (not specifically a db table)
+
+   ....more specific as it goes down
+
+-------------------------------------------------
+2) JAXB - code generation from the WSDL  
+
+   Options to use in jdk oob: 
+   --> go to [java_home]/bin/by running
+   --> xjc (works on WSDL or XSD for XML)
+
+   [cmd] --> wsimport -keep -verbose [url of WSDL] 
+                                     (http version)
+
+   WSDL classes need to be regenerated each time 
+   there is a change to WSDL......which is one of
+   the disadvantages of SOAP 
+
+   --> Generate code 
+   --> Copy and paste the generated packages from here
+       into the app, at src/main/java
+   
+   --> Note, when dealing with > 1 WSDL, copy contents
+       into existing directory
+
+-------------------------------------------------
+3) SWAGGER - html documentation webservices 
+   
+   ==> Elements to setting this up:
+       --> pom for swagger dependencies
+           springfox-swagger2
+       --> swagger configuration class  
+       --> annotate controller class  
+   
+   ==> Key Benefits:
+       --> html ui of endpoints api
+       --> can actually test endpoints
+       --> docs can be helpful, eg:
+           - run to test what parameters to pass to
+             endpoint  
+
+   ==> test at:
+       http://localhost:8080/swagger-ui.html
+
+   ==> Docs are created dynamically on server start
+
+-------------------------------------------------
+4) Security 
+ 
+   --> could pass on to environment variable
+       in our bubble case
+       (so application security is bound to machine)
+
+   --> otherwise a secret store would be the way 
+       to go
+
+-------------------------------------------------
+5) Exceptions with Spring Boot REST 
+
+   Pointcut advice works for REST based apps
+
+   --> Spring Boot automatically catches an
+       exception and passes it back to the server
+       (directly from where the exception was 
+        thrown)
+
+   --> Logging should be added
+       
+   --> Could try/catch a specific exception within
+       the pointcut advice, to treat that case 
+       differently. 
+
+-------------------------------------------------
+6) Testing
+
+   Contoller tests (weblayer)
+   --> starts the server (once) and runs all tests
+       witin the file
+ 
+   --> note: not necessary to stub utility classes,
+             arguably 
+
+   --> integration tests
+
+   --> JUnit library used: assertJ library
+       assertThat().isEqual() 
+
+-------------------------------------------------
+7) Properties files
+
+    --> internationalization
+    --> annotation:
+        @ConfigurationProperties(prefix = "xxx")
+        Prefix refers to the property name 
+
+-------------------------------------------------
+8) git rebase
+ 
+   --> very like merge 
+    --> but commit history lists all operations
+        separately in a linear way, rather than an 
+        awkward merge commit comment 
+        
+-------------------------------------------------
+
