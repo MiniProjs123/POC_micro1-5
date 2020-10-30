@@ -57,4 +57,10 @@ CORE 1-5 POINTS OF NOTE [Refer to JavaWorkspaceMicro, microservices_notes.rtf]
 
 --> swagger included in the pom.xml
 
+--> included GitGuardian in this github repository!
+    (do not expose a public key, even if only obsolete and unused) 
+
+
+
+ 
     
