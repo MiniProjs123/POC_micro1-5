@@ -1,0 +1,60 @@
+
+CORE 1-5 POINTS OF NOTE [Refer to JavaWorkspaceMicro, microservices_notes.rtf]
+                        [and note that git is in the workspace directory for this]
+
+--> note the good .gitignore
+
+--> RestControllerAspect (pointcuts and Metrics.counter())
+    Aspect oriented pointcuts to trigger methods before or after specific methods.
+    Used here for:
+    --> logging 
+    --> counting  
+     
+--> AbstractController
+    --> standard event handling (and endpoint error return status handling)
+    --> defines event publisher 'ApplicationEventPublisherAware' to be used by subclasses,
+        note the setter is required. 
+    --> ProductEventListener listens to application events by type
+        Here just to log our own defined product event (eg to log the object retrieved)
+    --> Also see endpoint variations & comparisons in text files at project level        
+        
+--> Category + Product
+    --> notice hashcode() and equals() are implemented
+    --> JPA
+    
+--> MySQL
+
+--> ProductServiceImpl
+    --> service tier logger
+    --> call direct to repository interfaces
+    --> implementation of paging in getProductsByPage()
+        --> uses:   Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("productCode").descending());
+            --> where productCode is from dm.Product (not the database column name of course)  
+
+--> ProductDaoRepository - some rough trickery outside the standard CrudRepository stuff
+    --> notice also the automatic data loading
+    
+--> application.yml
+
+		management:
+		  server:
+		    port: 8091
+		  endpoints:
+		    web:
+		      exposure:
+		        include: "*"
+		  endpoint:
+		    health:
+		      show-details: "always"
+
+    Now access some app related info: 
+    --> http://localhost:8091/actuator
+    --> http://localhost:8091/actuator/health
+    --> http://localhost:8091/actuator/metrics
+    
+    But, notice the application server port is 8084, so if correct access by Postman: 
+    http://localhost:8084/rollingstone-ecommerce-product-api
+
+--> swagger included in the pom.xml
+
+    
