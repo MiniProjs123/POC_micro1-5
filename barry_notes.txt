@@ -111,9 +111,10 @@ BARRY APP NOTES
 8) git rebase
  
    --> very like merge 
-    --> but commit history lists all operations
+   --> but commit history lists all operations
         separately in a linear way, rather than an 
         awkward merge commit comment 
-        
+ 
+   ....         
 -------------------------------------------------
 
